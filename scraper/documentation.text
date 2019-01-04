@@ -1,0 +1,24 @@
+{{ define "documentation" }}
+{{ range $_, $method := . }}
+/**
+ {{ range $_, $descriptionLine := splitLines $method.Description -}}
+ * {{ trimSpace $descriptionLine }}
+ {{ end -}}
+ * 
+{{- range $method.Args }}
+ * @param {{ "{" }}{{ .ArgType }}{{ "}" }} {{ .Name }} - {{ .Description }}
+{{- end -}}
+ {{- if (ne $method.RetType.ReturnType "") }}
+ * @returns {{ "{" }}{{ $method.RetType.ReturnType }}{{ "}" }} - {{ $method.RetType.Description }}
+ {{- end }}
+ */
+export function {{ $method.Name }}(
+	{{- range $index, $arg := $method.Args -}}
+	{{ $arg.Name }}: {{ funcThenVoid $arg.ArgType }}
+	{{- if (lt (plus $index 1) (len $method.Args)) -}}
+	, {{ end -}}
+	{{- end -}}
+): {{ def (funcThenVoid $method.RetType.ReturnType) "void" }}
+{{ end }}
+
+{{ end }}

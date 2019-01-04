@@ -1,0 +1,19 @@
+{
+	"name": "@types/bdapi",
+	"version": "1.0.0",
+	"description": "TypeScript typings for BdApi (BetterDiscord API)",
+	"keywords": [
+		"typescript",
+		"betterdiscord"
+	],
+	"files": [
+		"index.d.ts"
+	],
+	"author": "Acidic9",
+	"license": "MIT",
+	"private": false,
+	"dependencies": {
+		"@types/react": "*",
+		"@types/react-dom": "*"
+	}
+}
